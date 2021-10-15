@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+#authPage {
+  display: flex;
+  height: 100vh;
+}
+
+.authComponent {
+  background-color: red;
+  width: 60vw;
+  height: 100vh;
+}
+
+#sideImage img {
+  width: 40vw;
+  height: 100vh;
+}
