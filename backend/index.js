@@ -7,43 +7,40 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-// Router
-const router = express.Router();
-
 // Send OTP Route
-router.post("/send_otp", (req, res) => {
+app.post("/send_otp", (req, res) => {
   try {
     const { mobile } = req.body;
 
     // Function to send OTP
 
-    return res.status(200).send({ success: "OTP Sent" });
+    return res.status(200).send({ success: "OTP Sent", mobile });
   } catch (error) {
     res.status(500).send({ error: "Some error occurred" });
   }
 });
 
 // Verfiy OTP Route
-router.post("/verify_otp", (req, res) => {
+app.post("/verify_otp", (req, res) => {
   try {
     const { mobile, otp } = req.body;
 
     // Function to verify OTP
 
-    return res.status(200).send({ success: "OTP is correct" });
+    return res.status(200).send({ success: "OTP is correct", mobile, otp });
   } catch (error) {
     res.status(500).send({ error: "Some error occurred" });
   }
 });
 
 // Login Using Google
-router.post("/login_google", (req, res) => {
+app.post("/login_google", (req, res) => {
   try {
     const { authToken } = req.body;
 
     // Function to login threw google
 
-    return res.status(200).send({ success: "User Verified" });
+    return res.status(200).send({ success: "User Verified", authToken });
   } catch (error) {
     res.status(500).send({ error: "Some error occurred" });
   }
