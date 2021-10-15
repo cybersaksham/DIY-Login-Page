@@ -1,0 +1,23 @@
+{
+  "name": "diy-login",
+  "version": "1.0.0",
+  "description": "DIY Login Page with backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "both": "concurrently \"npm --prefix ./frontend start\" \"nodemon ./backend/index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cybersaksham/DIY-Login-Page.git"
+  },
+  "author": "cybersaksham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cybersaksham/DIY-Login-Page/issues"
+  },
+  "homepage": "https://github.com/cybersaksham/DIY-Login-Page#readme",
+  "dependencies": {
+    "concurrently": "^6.3.0"
+  }
+}
