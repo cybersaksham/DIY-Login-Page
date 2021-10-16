@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 20px;
+  padding: 0 100px;
 }
 
 .authComponent h2 {
@@ -27,18 +27,50 @@ body {
 }
 
 .authForm {
-  margin: 10px 0;
+  margin: 34px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.authForm label {
+  font-size: 20px;
 }
 
 .authForm input {
   outline: none;
+  width: 50%;
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid black;
-  padding: 2px;
+  border-bottom: 1px solid grey;
+  padding: 5px 2px;
+  min-height: 35px;
+  font-size: 18px;
+  margin: 10px 0;
+  margin-bottom: 20px;
+}
+
+#otpInput {
+  display: flex;
+}
+
+#otpInput input {
+  /* max-width: 10px; */
+  margin-right: 10px;
+  max-width: 25px;
+  text-align: center;
 }
 
 #sideImage img {
   width: 40vw;
   height: 100vh;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
