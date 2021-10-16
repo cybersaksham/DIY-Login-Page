@@ -46,8 +46,16 @@ export default function LoginPage() {
     changeFocus();
   };
 
+  const sendOtp = (e) => {
+    e.preventDefault();
+    const otpInputs = document.getElementsByClassName("otpInputField");
+    Array.from(otpInputs).forEach((e) => {
+      e.value = "";
+    });
+  };
+
   return (
-    <div id="loginPage" className="authComponent">
+    <div id="loginPage" onSubmit={sendOtp} className="authComponent">
       <h2>Login</h2>
       <form action="" className="authForm">
         <label htmlFor="">Mobile</label>
@@ -59,26 +67,33 @@ export default function LoginPage() {
             onFocus={() => changeFocus()}
             onKeyDown={(e) => keyDown(e)}
             type="number"
+            disabled={true}
           />
           <input
             className="otpInputField"
             onFocus={() => changeFocus()}
             onKeyDown={(e) => keyDown(e)}
             type="number"
+            disabled={true}
           />
           <input
             className="otpInputField"
             onFocus={() => changeFocus()}
             onKeyDown={(e) => keyDown(e)}
             type="number"
+            disabled={true}
           />
           <input
             className="otpInputField"
             onFocus={() => changeFocus()}
             onKeyDown={(e) => keyDown(e)}
             type="number"
+            disabled={true}
           />
         </div>
+        <button type="submit" id="submitBtn">
+          Send OTP
+        </button>
       </form>
     </div>
   );
