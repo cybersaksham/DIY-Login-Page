@@ -20,6 +20,16 @@ export default function LoginPage(props) {
     "Backspace",
   ];
 
+  const showError = (txt) => {
+    document.getElementById("errorText").innerText = txt;
+    if (localStorage["alertTime"] != null)
+      clearTimeout(localStorage["alertTime"]);
+    let s = setTimeout(() => {
+      document.getElementById("errorText").innerText = "";
+    }, 2500);
+    localStorage["alertTime"] = s;
+  };
+
   const checkOTPInput = () => {
     const otpInputs = document.getElementsByClassName("otpInputField");
     for (let i = 0; i < Array.from(otpInputs).length; i++) {
@@ -51,7 +61,7 @@ export default function LoginPage(props) {
       const json = await response.json();
       changeFocus();
       if (!json.error) setName(document.getElementById("mobInp").value);
-      else document.getElementById("errorText").innerText = json.error;
+      else showError(json.error);
     }
   };
 
@@ -79,7 +89,7 @@ export default function LoginPage(props) {
       el.value = "";
     });
     if (document.getElementById("mobInp").value === "") {
-      document.getElementById("errorText").innerText = "Enter correct mobile";
+      showError("Enter correct mobile");
       return;
     }
     const response = await fetch(HOST + "send_otp", {
@@ -96,7 +106,7 @@ export default function LoginPage(props) {
       });
       document.getElementById("submitBtn").innerText = "Resend OTP";
     } else {
-      document.getElementById("errorText").innerText = json.error;
+      showError(json.error);
     }
   };
 
