@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { GoogleLogin } from "react-google-login";
+import { useHistory } from "react-router-dom";
 
-export default function LoginPage() {
+export default function LoginPage(props) {
+  const { name, setName } = props;
+  const history = useHistory();
   const keyCodes = [
     "0",
     "1",
@@ -54,13 +58,15 @@ export default function LoginPage() {
     });
   };
 
-  function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log("Name: " + profile.getName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-  }
+  const responseGoogle = (response) => {
+    setName(response.profileObj.name);
+  };
+
+  useEffect(() => {
+    return () => {
+      history.push("/main");
+    };
+  }, [name]);
 
   return (
     <div id="loginPage" onSubmit={sendOtp} className="authComponent">
@@ -103,7 +109,13 @@ export default function LoginPage() {
           Send OTP
         </button>
       </form>
-      <div className="g-signin2" data-onsuccess="onSignIn"></div>
+      <GoogleLogin
+        clientId="758224727877-f28k6e0s5br1jgm7pctidica2a9bfl0d.apps.googleusercontent.com"
+        buttonText="Google"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
     </div>
   );
 }

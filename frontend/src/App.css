@@ -87,3 +87,10 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+#mainPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
