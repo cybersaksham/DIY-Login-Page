@@ -31,6 +31,12 @@ input {
   border-bottom: 2px solid black;
 }
 
+#errorText {
+  color: red;
+  margin-top: 5px;
+  height: 10px;
+}
+
 .authForm {
   margin: 34px 0;
   display: flex;
