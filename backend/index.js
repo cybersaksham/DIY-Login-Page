@@ -26,6 +26,8 @@ app.post("/verify_otp", (req, res) => {
     const { mobile, otp } = req.body;
 
     // Function to verify OTP
+    if (otp !== "1234")
+      return res.status(400).send({ error: "OTP is incorrect", mobile, otp });
 
     return res.status(200).send({ success: "OTP is correct", mobile, otp });
   } catch (error) {

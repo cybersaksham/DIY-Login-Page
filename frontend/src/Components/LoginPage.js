@@ -29,9 +29,29 @@ export default function LoginPage(props) {
     return Array.from(otpInputs).length - 1;
   };
 
-  const changeFocus = () => {
+  const changeFocus = async () => {
     const otpInputs = document.getElementsByClassName("otpInputField");
     otpInputs[checkOTPInput()].focus();
+    if (otpInputs[otpInputs.length - 1].value !== "") {
+      let otpText = "";
+      Array.from(otpInputs).forEach((el) => {
+        otpText += el.value;
+        el.value = "";
+      });
+      const response = await fetch(HOST + "verify_otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mobile: document.getElementById("mobInp").value,
+          otp: otpText,
+        }),
+      });
+      const json = await response.json();
+      changeFocus();
+      if (!json.error) setName(document.getElementById("mobInp").value);
+    }
   };
 
   const keyDown = (e) => {
@@ -57,6 +77,7 @@ export default function LoginPage(props) {
     Array.from(otpInputs).forEach((el) => {
       el.value = "";
     });
+    if (document.getElementById("mobInp").value === "") return;
     const response = await fetch(HOST + "send_otp", {
       method: "POST",
       headers: {
@@ -76,9 +97,8 @@ export default function LoginPage(props) {
   };
 
   useEffect(() => {
-    return () => {
-      if (name !== "") history.push("/main");
-    };
+    if (name !== "") history.push("/main");
+    return () => {};
   }, [name]);
 
   return (
