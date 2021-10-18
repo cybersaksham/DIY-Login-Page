@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 export default function LoginPage(props) {
   const { name, setName } = props;
   const history = useHistory();
+  const HOST = "http://localhost:5000/";
   const keyCodes = [
     "0",
     "1",
@@ -50,12 +51,24 @@ export default function LoginPage(props) {
     changeFocus();
   };
 
-  const sendOtp = (e) => {
+  const sendOtp = async (e) => {
     e.preventDefault();
     const otpInputs = document.getElementsByClassName("otpInputField");
-    Array.from(otpInputs).forEach((e) => {
-      e.value = "";
+    Array.from(otpInputs).forEach((el) => {
+      el.value = "";
     });
+    const response = await fetch(HOST + "send_otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ mobile: document.getElementById("mobInp").value }),
+    });
+    const json = await response.json();
+    Array.from(otpInputs).forEach((el) => {
+      el.disabled = false;
+    });
+    document.getElementById("submitBtn").innerText = "Resend OTP";
   };
 
   const responseGoogle = (response) => {
@@ -64,7 +77,7 @@ export default function LoginPage(props) {
 
   useEffect(() => {
     return () => {
-      history.push("/main");
+      if (name !== "") history.push("/main");
     };
   }, [name]);
 
@@ -73,7 +86,7 @@ export default function LoginPage(props) {
       <h2>Login</h2>
       <form action="" className="authForm">
         <label htmlFor="">Mobile</label>
-        <input type="number" placeholder="Enter mobile number" />
+        <input type="number" placeholder="Enter mobile number" id="mobInp" />
         <label htmlFor="">OTP</label>
         <div id="otpInput">
           <input
