@@ -161,13 +161,15 @@ export default function LoginPage(props) {
           Send OTP
         </button>
       </form>
-      <GoogleLogin
-        clientId="758224727877-f28k6e0s5br1jgm7pctidica2a9bfl0d.apps.googleusercontent.com"
-        buttonText="Google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
+      <div id="googleBtn">
+        <GoogleLogin
+          clientId="758224727877-f28k6e0s5br1jgm7pctidica2a9bfl0d.apps.googleusercontent.com"
+          buttonText="Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
     </div>
   );
 }
