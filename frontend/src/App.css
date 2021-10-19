@@ -100,3 +100,20 @@ input[type="number"] {
   justify-content: center;
   align-items: center;
 }
+
+@media only screen and (max-width: 750px) {
+  #sideImage {
+    display: none;
+  }
+
+  .authComponent {
+    width: 100vw;
+    padding: 0 30px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .authForm {
+    width: 90%;
+  }
+}
